@@ -1,0 +1,19 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  # https://guides.rubyonrails.org/configuring.html#database-pooling
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+
+development:
+  <<: *default
+  database: mlg_development
+
+test:
+  <<: *default
+  database: mlg_test
+
+production:
+  <<: *default
+  database: mlg_production
+  username: mlg_production
+  password: <%= ENV["STREETBEES_CHALLENGE_DATABASE_PASSWORD"] %>
