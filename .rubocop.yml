@@ -1,0 +1,251 @@
+# reference: https://evilmartians.com/chronicles/rubocoping-with-legacy-bring-your-ruby-code-up-to-standard
+inherit_mode:
+  merge:
+    - Exclude
+
+require:
+  - .rubocop/cop/naming/short_variable_name.rb
+  - .rubocop/cop/rspec/redundant_require_rails_helper.rb
+  - standard
+  - standard-custom
+  - standard-rails
+  - rubocop-rspec
+  - rubocop-rails
+
+# only use these cops:
+inherit_gem:
+  # https://github.com/standardrb/standard/blob/main/config/base.yml
+  standard: config/base.yml
+  # https://github.com/standardrb/standard-custom/blob/main/config/base.yml
+  standard-custom: config/base.yml
+  # https://github.com/standardrb/standard-rails/blob/main/config/base.yml
+  standard-rails: config/base.yml
+
+AllCops:
+  # disable all cops (except the ones explicitly inhereted above and the ones enabled below)
+  DisabledByDefault: true
+  SuggestExtensions: false
+
+Naming/ShortVariableName:
+  Enabled: true
+  Exclude:
+    - "config/initializers/**/*"
+    - "lib/tasks/**/*"
+    - "db/**/*"
+    - "bin/**/*"
+
+Metrics/ParameterLists:
+  Enabled: true
+  Max: 4
+  Exclude:
+    - "app/domains/significance_test.rb"
+
+Metrics/MethodLength:
+  Enabled: true
+  Max: 15
+  CountAsOne: ["array", "method_call", "heredoc", "hash"]
+
+Style/BisectedAttrAccessor:
+  Enabled: true
+
+Style/CollectionCompact:
+  Enabled: true
+
+Style/CollectionMethods:
+  Enabled: true
+
+Style/CombinableLoops:
+  Enabled: true
+
+Style/EndlessMethod:
+  Enabled: true
+
+Style/EvenOdd:
+  Enabled: true
+
+Style/FileEmpty:
+  Enabled: true
+
+Style/HashEachMethods:
+  Enabled: true
+
+Style/HashTransformKeys:
+  Enabled: true
+
+Style/HashTransformValues:
+  Enabled: true
+
+Style/InverseMethods:
+  Enabled: true
+
+Style/MethodDefParentheses:
+  Enabled: true
+
+Style/NumericPredicate:
+  Enabled: true
+
+Style/ObjectThen:
+  Enabled: true
+
+Style/RedundantFilterChain:
+  Enabled: true
+
+Style/RedundantInitialize:
+  Enabled: true
+
+Style/RedundantSelfAssignment:
+  Enabled: true
+
+Style/ReturnNil:
+  Enabled: true
+
+Style/ReturnNilInPredicateMethodDefinition:
+  Enabled: true
+
+Lint/AmbiguousRange:
+  Enabled: true
+
+Lint/AmbiguousOperatorPrecedence:
+  Enabled: true
+
+Layout/EmptyLinesAroundAttributeAccessor:
+  Enabled: true
+
+Layout/EmptyLineBetweenDefs:
+  Enabled: true
+
+Layout/EmptyLineAfterGuardClause:
+  Enabled: true
+
+Layout/LineLength:
+  Enabled: true
+  Max: 112
+  Exclude:
+    - "db/**/*"
+    - "config/initializers/devise.rb"
+
+Layout/BlockAlignment:
+  Enabled: true
+  EnforcedStyleAlignWith: start_of_block
+
+Naming/FileName:
+  Enabled: true
+
+Naming/HeredocDelimiterNaming:
+  Enabled: true
+
+Naming/MethodName:
+  Enabled: true
+
+Naming/MethodParameterName:
+  Enabled: true
+
+Naming/VariableNumber:
+  Enabled: true
+
+RSpec/RedundantRequireRailsHelper:
+  Enabled: true
+
+# rubocop-rspec
+RSpec/ContextMethod:
+  Enabled: true
+
+RSpec/ContextWording:
+  Enabled: true
+
+RSpec/DescribeClass:
+  inherit_mode:
+    override:
+      - Exclude
+  Enabled: true
+  Exclude:
+    - "spec/tasks/**/*"
+  IgnoredMetadata:
+    type:
+      - task
+
+RSpec/DescribedClass:
+  Enabled: true
+
+RSpec/EmptyExampleGroup:
+  Enabled: true
+  Exclude:
+    - "spec/factories/**/*"
+
+RSpec/EmptyLineAfterExample:
+  Enabled: true
+
+RSpec/EmptyLineAfterExampleGroup:
+  Enabled: true
+
+RSpec/EmptyLineAfterHook:
+  Enabled: true
+
+RSpec/MultipleDescribes:
+  Enabled: true
+
+RSpec/ExcessiveDocstringSpacing:
+  Enabled: true
+
+RSpec/MultipleMemoizedHelpers:
+  Enabled: true
+  Max: 0
+  AllowSubject: false
+
+RSpec/SpecFilePathFormat:
+  Enabled: true
+  Exclude:
+    - "spec/requests/**/*"
+
+RSpec/VerifiedDoubleReference:
+  Enabled: true
+
+RSpec/VoidExpect:
+  Enabled: true
+
+# rubocop-rails
+Rails/HttpStatus:
+  Enabled: true
+
+Rails/IndexBy:
+  Enabled: true
+
+Rails/PluralizationGrammar:
+  Enabled: true
+
+Rails/Present:
+  Enabled: true
+
+Rails/RakeEnvironment:
+  Enabled: true
+
+Rails/ResponseParsedBody:
+  Enabled: true
+
+Rails/ThreeStateBooleanColumn:
+  Enabled: true
+
+Rails/RedundantActiveRecordAllMethod:
+  Enabled: true
+
+Rails/ReflectionClassName:
+  Enabled: false
+
+Rails/HasManyOrHasOneDependent:
+  Enabled: false
+
+Rails/InverseOf:
+  Enabled: false
+
+Rails/BulkChangeTable:
+  Enabled: false
+
+Rails/LinkToBlank:
+  Enabled: false
+
+Rails/EnvironmentVariableAccess:
+  Exclude:
+    - "config/initializers/**/*"
+
+Rails/HasAndBelongsToMany:
+  Enabled: false
