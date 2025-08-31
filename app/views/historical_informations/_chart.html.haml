@@ -1,0 +1,10 @@
+.historical-data
+  %h3 Historical Information Data
+  - if historical_information.present?
+    %pre
+      - JSON.pretty_generate(historical_information)
+  - else
+    %p No data available
+
+.d-flex.align-items-center
+  = link_to 'Back to Index', root_path, class: 'back-button'

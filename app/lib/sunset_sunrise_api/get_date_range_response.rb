@@ -3,6 +3,7 @@ module SunsetSunriseApi
 
     def data
       dates = []
+      return dates if parsed_json["results"].empty?
 
       parsed_json["results"].each do |result|
         dates.push(date_params(result))
