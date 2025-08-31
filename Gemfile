@@ -72,3 +72,5 @@ end
 group :assets do
   gem 'sass-rails'
 end
+
+gem "geocoder", "~> 1.8"
