@@ -13,7 +13,7 @@
   },
   "scripts": {
     "build": "esbuild app/javascript/*.* --bundle --sourcemap --outdir=app/assets/builds --public-path=assets",
-    "build:css": "sass ./app/assets/stylesheets/application.bootstrap.scss:./app/assets/builds/application.css --load-path=node_modules",
+    "build:css": "sass ./app/assets/stylesheets/application.scss:./app/assets/builds/application.css --load-path=node_modules",
     "test": "jest",
     "test:ci": "jest --verbose ./app/javascript --ci"
   },

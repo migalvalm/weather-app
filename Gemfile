@@ -33,7 +33,9 @@ gem "redis", "~> 5.0", ">= 5.0.6"
 gem "view_component"
 gem "haml-rails"
 gem "autoprefixer-rails"
-gem "bootstrap-sass", '~> 3.4'
+gem "bootstrap-sass", '~> 3.4.1'
+gem 'jquery-rails'
+gem 'sassc-rails', '>= 2.1.0'
 gem "recursive-open-struct"
 gem 'sprockets-rails'
 
@@ -55,6 +57,7 @@ group :development, :test do
   gem "brakeman", require: false
   gem "rubocop-rails-omakase", require: false
   gem 'dotenv-rails', groups: [:development, :test]
+  gem 'annotate'
 end
 
 group :development do

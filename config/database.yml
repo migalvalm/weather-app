@@ -6,14 +6,14 @@ default: &default
 
 development:
   <<: *default
-  database: mlg_development
+  database: weather_app_development
 
 test:
   <<: *default
-  database: mlg_test
+  database: weather_app_test
 
 production:
   <<: *default
-  database: mlg_production
-  username: mlg_production
+  database: weather_app_production
+  username: weather_app_production
   password: <%= ENV["STREETBEES_CHALLENGE_DATABASE_PASSWORD"] %>
