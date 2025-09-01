@@ -65,8 +65,14 @@ group :development do
 end
 
 group :test do
+  gem "rspec-rails"
   gem "capybara"
   gem "selenium-webdriver"
+  gem "factory_bot_rails"
+  gem "webmock"
+  gem "vcr"
+  gem "mocha"
+  gem "rails-controller-testing"
 end
 
 group :assets do

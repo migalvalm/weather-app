@@ -15,6 +15,7 @@ class HistoricalInformationsController < ApplicationController
   end
 
   def new
+    @historical_information = HistoricalInformation.new
   end
   
   def create
