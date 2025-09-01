@@ -1,3 +1,23 @@
+# == Schema Information
+#
+# Table name: historical_informations
+#
+#  id         :integer          not null, primary key
+#  latitude   :decimal(10, 7)
+#  longitude  :decimal(10, 7)
+#  start_date :date
+#  end_date   :date
+#  data       :jsonb
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
+# Indexes
+#
+#  index_historical_informations_on_end_date                (end_date)
+#  index_historical_informations_on_latitude_and_longitude  (latitude,longitude)
+#  index_historical_informations_on_start_date              (start_date)
+#
+
 require "rails_helper"
 
 RSpec.describe HistoricalInformation, type: :model do

@@ -2,21 +2,18 @@ class HistoricalInformationsController < ApplicationController
   before_action :set_historical_information, only: :show
 
   def index
-    @historical_information ||= HistoricalInformation.new(
+    @historical_information = HistoricalInformation.new(
       latitude: @coordinates[0],
       longitude: @coordinates[1],
-      start_date: Time.current,
+      start_date: Time.current - 1.day,
       end_date: Time.current
     )
-    
+
     respond_to do |format|
       format.html
     end
   end
 
-  def new
-    @historical_information = HistoricalInformation.new
-  end
   
   def create
     @historical_information = FetchDateRangeSunsetSunrise.new.call(
@@ -27,7 +24,7 @@ class HistoricalInformationsController < ApplicationController
     )
 
     if @historical_information.data.present?
-      redirect_to @historical_information
+      redirect_to historical_information_path(@historical_information)
     else
       render :index
     end
