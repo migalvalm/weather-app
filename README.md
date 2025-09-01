@@ -50,6 +50,7 @@ bundle install
 
 # Install JavaScript packages
 yarn install
+rails assets:precompile
 ```
 
 ### 3. Database Setup
