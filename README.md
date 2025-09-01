@@ -89,13 +89,13 @@ open http://localhost:3000
 ### Run Test Suite
 ```bash
 # Run Ruby tests
-rails test
+rspec
 
 # Run JavaScript tests
 yarn test
 
 # Run all tests
-rails test && yarn test
+rspec && yarn test
 ```
 
 ### Code Quality
