@@ -1,0 +1,35 @@
+.d-flex.flex-column.chart-container
+  %canvas{data: {controller: "historical-data", "historical-data-target":"chart", "historical-data-chart-data": @historical_information.data.to_json, action: "historical-data#initializeChart"}, width: "800", height: "400"}
+
+.button.d-flex.justify-content-center.align-items-center.p-4
+  = link_to 'Back to Index', root_path(@historical_information), class: 'link'
+
+%table.table.table-bordered{id: "historical-data"}
+  %thead.thead-dark
+    %tr
+      %th Date
+      %th Sunrise
+      %th Golden Hour
+      %th Sunset
+  %tbody
+    - if @historical_information.present?
+      - @historical_information.data.each do |day|
+        %tr
+          %td 
+            = day["date"]
+          %td 
+            = day["sunrise_time"]
+          %td 
+            = day["golden_hour"]
+          %td 
+            = day["sunset_time"]
+      
+    - else
+      %tr
+        %td.col-4
+          No data available
+
+.button.d-flex.justify-content-center.align-items-center.p-4
+  = link_to 'Back to Index', root_path(@historical_information), class: 'link'
+
+

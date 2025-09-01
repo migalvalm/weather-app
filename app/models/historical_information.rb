@@ -19,14 +19,6 @@
 #
 
 class HistoricalInformation < ApplicationRecord
-  validates :latitude, presence: true, numericality: {
-    greater_than_or_equal_to: -90,
-    less_than_or_equal_to: 90
-  }
-  validates :longitude, presence: true, numericality: {
-    greater_than_or_equal_to: -180,
-    less_than_or_equal_to: 180
-  }
   validates :start_date, presence: true
   validates :end_date, presence: true
   validates :data, presence: true
@@ -37,6 +29,6 @@ class HistoricalInformation < ApplicationRecord
   
   def end_date_after_start_date
     return if start_date.nil? || end_date.nil?
-    errors.add(:end_date, 'must be after start date') if end_date <= start_date
+    errors.add(:end_date, 'must be after start date') if end_date < start_date
   end
 end

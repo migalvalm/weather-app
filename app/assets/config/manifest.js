@@ -4,3 +4,4 @@
 //= link application.js
 //= link controllers/application.js
 //= link controllers/index.js
+//= link controllers/historical_data_controller.js

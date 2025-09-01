@@ -1,11 +1,13 @@
 class HistoricalInformationsController < ApplicationController
-  before_action :set_historical_information
+  before_action :set_historical_information, only: :show
 
   def index
-    @historical_information.latitude = @coordinates[0]
-    @historical_information.longitude = @coordinates[1]
-    @historical_information.start_date ||= Time.current.beginning_of_year
-    @historical_information.end_date ||= Time.current
+    @historical_information ||= HistoricalInformation.new(
+      latitude: @coordinates[0],
+      longitude: @coordinates[1],
+      start_date: Time.current,
+      end_date: Time.current
+    )
     
     respond_to do |format|
       format.html
@@ -13,7 +15,6 @@ class HistoricalInformationsController < ApplicationController
   end
 
   def new
-    
   end
   
   def create
@@ -24,8 +25,10 @@ class HistoricalInformationsController < ApplicationController
       end_date: historical_information_params["end_date"]
     )
 
-    respond_to do |format|
-      format.turbo_stream
+    if @historical_information.data.present?
+      redirect_to @historical_information
+    else
+      render :index
     end
   end
 
@@ -35,10 +38,17 @@ class HistoricalInformationsController < ApplicationController
   private
 
   def set_historical_information
-    @historical_information = HistoricalInformation.new
+    @historical_information ||= HistoricalInformation.find(params[:id])
   end
 
   def historical_information_params
-    params.permit(:latitude, :longitude, :start_date, :end_date)
+    params.permit(
+      historical_information: [
+        :latitude,
+        :longitude,
+        :start_date,
+        :end_date
+      ]
+    )[:historical_information]
   end
 end

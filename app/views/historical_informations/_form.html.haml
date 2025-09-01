@@ -1,34 +1,27 @@
-= turbo_frame_tag "new_historical_information" do
-  = form_with do |form|
-    - if @historical_information.errors.any?
-      .d-flex.bg-blue
-        .h2
-          = pluralize(@historical_information.errors.count, "error") 
-          prohibited this post from being saved:
-        %ul
-          - @historical_information.errors.each do |error|
-            %li
-              = error.full_message
-            
+= form_with(model: @historical_information, class: "needs-validation") do |form|
+  .d-flex.flex-column.align-items-center.p-4
+    .d-flex.flex-column.align-items-center
+      .row.g-6
+        .col-md-6
+          = form.label :latitude, class: "form-label"
+          = form.number_field :latitude, class: "form-control", step: "0.000001", value: @historical_information.latitude
 
-    .d-flex.flex-column.align-items-center.p-4
-      .d-flex.flex-column.align-items-center
-        %div.fs-6.fw-bold.text-muted.text-wrap.mt-3.text-center.pb-4
-          Coordinates are automatically detected from your location if possible. If the fields appear empty, please visit <a href="https://gpscoordinates.io/" target="_blank">gpscoordinates.io</a> to manually enter your coordinates.
-        %div.py-2
-          = form.label :latitude
-          = form.number_field :latitude, step: "0.000001", value: @historical_information.latitude
+        .col-md-6
+          = form.label :longitude, class: "form-label"
+          = form.number_field :longitude, class: "form-control", step: "0.000001", value: @historical_information.longitude
 
-        %div.py-2
-          = form.label :longitude
-          = form.number_field :longitude, step: "0.000001", value: @historical_information.longitude
-      %div.py-2
-        = form.label :start_date
-        = form.date_field :start_date, value: @historical_information.start_date
+        .col-12
+          %div.fs-6.fw-bold.text-muted.text-wrap.text-center.py-4
+            If possible coordinates are automatically detected from your location. If the fields appear empty, please visit <a href="https://gpscoordinates.io/" target="_blank">gpscoordinates.io</a> to manually enter your coordinates.
 
-      %div.py-2
-        = form.label :end_date
-        = form.date_field :end_date, value: @historical_information.end_date
+      .row.g-6
+        .col-md-6
+          = form.label :start_date, class: "form-label"
+          = form.date_field :start_date, class: "form-control", value: @historical_information.start_date
 
-      %div.pt-2
-        = form.submit "Search"
+        .col-md-6
+          = form.label :end_date, class: "form-label"
+          = form.date_field :end_date, class: "form-control", value: @historical_information.end_date
+
+    .col-12.p-4
+      = form.submit "Search", class: "btn btn-primary w-100"

@@ -1,7 +1,7 @@
 class FetchDateRangeSunsetSunrise
   def call(latitude:, longitude:, start_date:, end_date:)
-    cached_data = find_cached_data(latitude, longitude, start_date, end_date)
-    return cached_data if cached_data
+    cached_historical_information = find_cached_data(latitude, longitude, start_date, end_date)
+    return cached_historical_information if cached_historical_information&.data
 
     api_data = SunsetSunriseApi::Client.get_date_range(
       latitude: latitude,

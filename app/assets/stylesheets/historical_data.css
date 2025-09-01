@@ -1,0 +1,44 @@
+/* app/assets/stylesheets/historical_data.css */
+
+.chart-container {
+  margin-bottom: 2rem;
+  padding: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.historical-data {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 2rem;
+}
+
+.historical-data th,
+.historical-data td {
+  padding: 0.5rem;
+  border: 1px solid #ddd;
+  text-align: left;
+}
+
+.historical-data th {
+  background-color: #f5f5f5;
+}
+
+.historical-data tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.back-button {
+  display: inline-block;
+  margin-top: 1rem;
+  padding: 0.5rem 1rem;
+  background-color: #007bff;
+  color: white;
+  text-decoration: none;
+  border-radius: 4px;
+  transition: background-color 0.2s;
+}
+
+.back-button:hover {
+  background-color: #0056b3;
+}
