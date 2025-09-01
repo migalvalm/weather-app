@@ -4,4 +4,6 @@
 //= link application.js
 //= link controllers/application.js
 //= link controllers/index.js
-//= link controllers/historical_data_controller.js
+//= link controllers/chart_controller.js
+//= link_tree ../../javascript .js
+//= link_tree ../../../vendor/javascript .js

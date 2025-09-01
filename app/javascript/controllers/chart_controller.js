@@ -1,10 +1,10 @@
-// app/javascript/controllers/historical_data_controller.js
 import { Controller } from '@hotwired/stimulus'
-import Chart from 'chart.js'
+import { Chart, registerables } from "chart.js"
+Chart.register(...registerables)
 
 export default class extends Controller {
   static values = {
-    chartData: Array
+    data: Array
   }
 
   static targets = ['chart']
@@ -74,8 +74,8 @@ export default class extends Controller {
       sunsetValues: []
     }
 
-    // Convert times to numerical values for plotting
-    this.chartDataValue.forEach(day => {
+
+    this.dataValue.forEach(day => {
       data.labels.push(day.date)
       data.sunriseValues.push(this.convertTimeToNumber(day.sunrise_time))
       data.goldenHourValues.push(this.convertTimeToNumber(day.golden_hour))
@@ -86,7 +86,13 @@ export default class extends Controller {
   }
 
   convertTimeToNumber(timeStr) {
-    const [hours, minutes, seconds] = timeStr.split(':').map(Number)
-    return hours + minutes / 60 + seconds / 3600
+    const [hours, minutes, seconds] = timeStr.split(':').map(value => {
+      const num = Number(value)
+      console.log(`Parsed ${value} to ${num}`)
+      return isNaN(num) ? 0 : num
+    })
+
+    const result = hours + minutes / 60 + seconds / 3600
+    return result
   }
 }

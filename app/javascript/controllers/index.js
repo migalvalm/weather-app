@@ -3,5 +3,5 @@
 // ./bin/rails generate stimulus controllerName
 
 import { application } from "./application"
-import HistoricalDataController from "./historical_data_controller"
-application.register("historical-data", HistoricalDataController)
+import ChartController from "./chart_controller"
+application.register("chart", ChartController)
