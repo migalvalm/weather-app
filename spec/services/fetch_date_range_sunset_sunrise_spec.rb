@@ -26,7 +26,7 @@ RSpec.describe FetchDateRangeSunsetSunrise do
       it "returns cached historical information" do
         cached_info = create(:historical_information, valid_params.merge(data: api_response_data))
         
-        result = service.call(valid_params)
+        result = service.call(**valid_params)
         
         expect(result).to eq(cached_info)
       end
@@ -36,12 +36,7 @@ RSpec.describe FetchDateRangeSunsetSunrise do
         
         expect(SunsetSunriseApi::Client).not_to receive(:get_date_range)
         
-        service.call(valid_params)
-      end
-
-      it "returns nil when cached data has no data field" do
-        # Skip this test since the model validation prevents creating records with nil data
-        skip "Model validation prevents creating records with nil data"
+        service.call(**valid_params)
       end
     end
 
@@ -51,21 +46,21 @@ RSpec.describe FetchDateRangeSunsetSunrise do
           .with(**valid_params)
           .and_return(api_response_data)
         
-        service.call(valid_params)
+        service.call(**valid_params)
       end
 
       it "creates a new HistoricalInformation record" do
         allow(SunsetSunriseApi::Client).to receive(:get_date_range).and_return(api_response_data)
         
         expect {
-          service.call(valid_params)
+          service.call(**valid_params)
         }.to change(HistoricalInformation, :count).by(1)
       end
 
       it "stores the API response data correctly" do
         allow(SunsetSunriseApi::Client).to receive(:get_date_range).and_return(api_response_data)
         
-        result = service.call(valid_params)
+        result = service.call(**valid_params)
         
         expect(result.data).to eq(api_response_data)
         expect(result.latitude).to eq(valid_params[:latitude])
@@ -77,7 +72,7 @@ RSpec.describe FetchDateRangeSunsetSunrise do
       it "returns the created HistoricalInformation record" do
         allow(SunsetSunriseApi::Client).to receive(:get_date_range).and_return(api_response_data)
         
-        result = service.call(valid_params)
+        result = service.call(**valid_params)
         
         expect(result).to be_a(HistoricalInformation)
         expect(result).to be_persisted
@@ -89,7 +84,7 @@ RSpec.describe FetchDateRangeSunsetSunrise do
         allow(SunsetSunriseApi::Client).to receive(:get_date_range).and_raise(StandardError.new("API Error"))
         
         expect {
-          service.call(valid_params)
+          service.call(**valid_params)
         }.to raise_error(StandardError)
       end
 
@@ -98,7 +93,7 @@ RSpec.describe FetchDateRangeSunsetSunrise do
         
         expect {
           expect {
-            service.call(valid_params)
+            service.call(**valid_params)
           }.to raise_error(StandardError)
         }.not_to change(HistoricalInformation, :count)
       end
@@ -113,7 +108,7 @@ RSpec.describe FetchDateRangeSunsetSunrise do
         
         allow(SunsetSunriseApi::Client).to receive(:get_date_range).and_return(api_response_data)
         
-        result = service.call(string_params)
+        result = service.call(**string_params)
         
         expect(result.latitude).to eq(BigDecimal("40.7128"))
         expect(result.longitude).to eq(BigDecimal("-74.0060"))
@@ -127,7 +122,7 @@ RSpec.describe FetchDateRangeSunsetSunrise do
         
         allow(SunsetSunriseApi::Client).to receive(:get_date_range).and_return(api_response_data)
         
-        result = service.call(string_params)
+        result = service.call(**string_params)
         
         expect(result.start_date).to eq(Date.current)
         expect(result.end_date).to eq(Date.current + 1.day)
@@ -210,7 +205,7 @@ RSpec.describe FetchDateRangeSunsetSunrise do
   describe "integration scenarios" do
     it "handles the complete flow from API call to storage" do
       VCR.use_cassette("sunset_sunrise_api_integration") do
-        result = service.call(valid_params)
+        result = service.call(**valid_params)
         
         expect(result).to be_a(HistoricalInformation)
         expect(result).to be_persisted
@@ -223,10 +218,10 @@ RSpec.describe FetchDateRangeSunsetSunrise do
     it "caches subsequent calls with same parameters" do
       VCR.use_cassette("sunset_sunrise_api_caching") do
         # First call - should hit API
-        first_result = service.call(valid_params)
+        first_result = service.call(**valid_params)
         
         # Second call - should use cache
-        second_result = service.call(valid_params)
+        second_result = service.call(**valid_params)
         
         expect(second_result).to eq(first_result)
         expect(second_result.id).to eq(first_result.id)

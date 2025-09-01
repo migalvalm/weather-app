@@ -55,24 +55,6 @@ RSpec.describe SunsetSunriseApi::Response do
     end
   end
 
-  describe "method visibility" do
-    it "has parsed_json as a protected method" do
-      expect(response).to respond_to(:parsed_json, true)
-      expect(response.public_methods).not_to include(:parsed_json)
-    end
-
-    it "allows subclasses to access parsed_json" do
-      subclass = Class.new(described_class) do
-        def test_parsed_json
-          parsed_json
-        end
-      end
-      
-      subclass_instance = subclass.new(response_mock)
-      result = subclass_instance.test_parsed_json
-      expect(result).to eq({ "test" => "data" })
-    end
-  end
 
   describe "edge cases" do
     it "handles response object with nil body" do

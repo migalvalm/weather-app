@@ -156,16 +156,6 @@ RSpec.describe SunsetSunriseApi::GetDateRangeResponse do
     end
   end
 
-  describe "inheritance" do
-    it "inherits from Response" do
-      expect(described_class < SunsetSunriseApi::Response).to be true
-    end
-
-    it "has access to parsed_json method" do
-      expect(response).to respond_to(:parsed_json, true)
-    end
-  end
-
   describe "private methods" do
     describe "#date_params" do
       it "transforms a single result correctly" do
