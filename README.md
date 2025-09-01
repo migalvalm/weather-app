@@ -185,10 +185,9 @@ app/
 - `SUNSET_SUNRISE_API_URL`: External API endpoint
 
 ### Database Configuration
-The application uses PostgreSQL with the following key features:
+The application uses PostgreSQL which uses the following key features of it:
 - JSONB columns for flexible data storage
 - Indexed columns for performance optimization
-- Proper foreign key constraints
 
 ## Performance Optimizations
 
