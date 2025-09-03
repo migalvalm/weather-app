@@ -69,8 +69,8 @@ DATABASE_URL=postgresql://localhost/weather_app_development
 # Redis
 REDIS_URL=redis://localhost:6379/0
 
-# External API (you'll need to obtain API keys)
-SUNSET_SUNRISE_API_URL=https://api.sunrise-sunset.org
+# External API
+SUNSET_SUNRISE_API_URL=https://api.sunrisesunset.io
 ```
 
 ### 5. Start the Application
